@@ -27,6 +27,27 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 
 
 
+# def amazon(book):
+#     book = book.replace(" ",'+')
+#     url = f'https://www.amazon.in/s?k=python&ref=nb_sb_noss_2'
+#     print(url)
+#     res = requests.get(url,headers=headers)
+#     soup = BeautifulSoup(res.text,'html.parser')
+#     names = soup.select(".a-size-medium")
+#     for i in range(len(names)):
+#         try:
+#             price = soup.select(".a-spacing-top-small .a-price-whole")[i].get_text().strip()
+#             if price != "":
+#                 names = soup.select(".a-color-base.a-text-normal")[i].get_text().strip()
+#                 link = soup.select(" h2 .a-link-normal")[i].attrs.get("href")
+#                 print("https://www.amazon.in/"+str(link))
+#                 print("\n")
+#         except:
+#             price = ""
+#             names = ""
+# amazon(input("Enter the book name\n"))
+
+
 
 
 
@@ -90,10 +111,14 @@ def amazon(book,num):
                     price = soup.select(".a-spacing-top-small .a-price-whole")[i].get_text().strip()
                     if price != "":
                         names = soup.select(".a-color-base.a-text-normal")[i].get_text().strip()
-                        link = soup.select(".a-link-normal")[i].attrs.get("href")
+                        link = soup.select("h2 .a-link-normal")[i].attrs.get("href")
+                        link = "https://www.amazon.in/"+str(link)
                 except:
                     price = ""
                     names = ""
                 lst = [names,price,link]
                 writer.writerow(lst)
-amazon(input("Enter the book name\n"),int(input("Number of pages")))
+    print("Done!!")
+
+
+amazon(input("Enter the book name\n"),int(input("Number of pages\n")))
